@@ -1,5 +1,12 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { CANCEL, END } from 'redux-saga'
+
+class DataError extends Error {
+  constructor(status: number, statusText: string, data?: any) {
+    super(`${status} ${statusText}`)
+    Object.setPrototypeOf(this, Object.assign({}, DataError.prototype, { status, statusText, data }))
+  }
+}
 
 enum METHOD {
   GET = 'get',
@@ -14,7 +21,7 @@ const baseURL = '/'
 type Data = { [key: string]: string | Blob }
 type Params = { [key: string]: string | number }
 
-interface IOptions {
+interface Options {
   multipart?: boolean
   params?: Params
   data?: Data
@@ -42,7 +49,7 @@ const multipartTransform = (data: Data): FormData =>
       return form
     }, new FormData())
 
-const api = (method: METHOD, url: string, options: IOptions | undefined = defaultOptions) => {
+const api = (method: METHOD, url: string, options: Options | undefined = defaultOptions) => {
   const source = axios.CancelToken.source()
   const multipart = options.multipart
   const data = options.data
@@ -60,15 +67,17 @@ const api = (method: METHOD, url: string, options: IOptions | undefined = defaul
     cancelToken: source.token,
     ...(multipart && { transformRequest: [data => multipartTransform(data)] }),
     ...(transform && { transformResponse: [data => transform(data)] }),
-    ...(eventEmitter && { onUploadProgress: function(e) {}, onDownloadProgress: function(e) {} }),
+    ...(eventEmitter && { onUploadProgress: eventEmitter, onDownloadProgress: eventEmitter }),
   })
     .then(function(response) {
       eventEmitter && eventEmitter(END)
       return response
     })
-    .catch(function(error) {
+    .catch(function(err: AxiosError) {
       eventEmitter && eventEmitter(END)
-      throw error
+      if (err && err.response) {
+        throw new DataError(err.response.status, err.response.statusText, err.response.data)
+      }
     })
 
   promise[CANCEL] = source.cancel
@@ -77,9 +86,9 @@ const api = (method: METHOD, url: string, options: IOptions | undefined = defaul
 }
 
 export default {
-  [METHOD.GET]: (url: string, options?: IOptions) => api(METHOD.GET, url, options),
-  [METHOD.POST]: (url: string, options?: IOptions) => api(METHOD.POST, url, options),
-  [METHOD.DELETE]: (url: string, options?: IOptions) => api(METHOD.DELETE, url, options),
-  [METHOD.PATCH]: (url: string, options?: IOptions) => api(METHOD.PATCH, url, options),
-  [METHOD.PUT]: (url: string, options?: IOptions) => api(METHOD.PUT, url, options),
+  [METHOD.GET]: (url: string, options?: Options) => api(METHOD.GET, url, options),
+  [METHOD.POST]: (url: string, options?: Options) => api(METHOD.POST, url, options),
+  [METHOD.DELETE]: (url: string, options?: Options) => api(METHOD.DELETE, url, options),
+  [METHOD.PATCH]: (url: string, options?: Options) => api(METHOD.PATCH, url, options),
+  [METHOD.PUT]: (url: string, options?: Options) => api(METHOD.PUT, url, options),
 }
