@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root'
 import React from 'react'
 import logo from 'images/logo.svg'
 import style from './App.module.css'
@@ -18,4 +19,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default hot(App)

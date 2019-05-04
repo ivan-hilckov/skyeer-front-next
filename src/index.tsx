@@ -1,6 +1,8 @@
+import 'react-hot-loader'
+import 'style/index.css'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
-import 'style/index.css'
 import App from 'components/App/App'
 import * as serviceWorker from './serviceWorker'
 
