@@ -6,7 +6,6 @@ import { AppActions } from 'store/reducers/app'
 export function* check() {
   try {
     const whoami = yield call(api.get, endpoint.account())
-    console.log(whoami)
     yield put(AppActions.checkAuthSuccess())
   } catch (err) {
     yield put(AppActions.checkAuthError())
