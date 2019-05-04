@@ -1,0 +1,10 @@
+.vscode
+build
+config
+node_modules
+public
+scripts
+
+*.js
+*.tsx
+*.ts
