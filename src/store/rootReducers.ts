@@ -1,5 +1,5 @@
 import { createReducerFunction } from 'immer-reducer'
-import { Reducer } from 'redux'
+import { combineReducers } from 'redux'
 import { AppReducer, AppState, appInitialState } from 'store/reducers/app'
 
 export interface State {
@@ -21,3 +21,7 @@ function composeReducers<S>(...reducers: (Reducer<S, any>)[]): Reducer<any, any>
 }
 
 export const reducer = composeReducers<State>(createReducerFunction(AppReducer, initialState))
+
+const rootReducer = combineReducers({})
+
+export default rootReducer
