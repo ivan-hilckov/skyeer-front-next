@@ -5,21 +5,19 @@ import { AppSelectors } from 'store/selectors/app'
 
 export interface AppState {
   checkState: STATE
-  isAuthorized: boolean | undefined
+  isAuthorized: boolean
 }
 
 export const appInitialState: AppState = {
-  checkState: STATE.IDLE,
-  isAuthorized: undefined,
+  checkState: STATE.WORK,
+  isAuthorized: false,
 }
 
 export class AppReducer extends ImmerReducer<State> {
   selectors = new AppSelectors(this.draftState)
   checkAuth() {
     const app = this.selectors.getApp()
-
     app.checkState = STATE.WORK
-    app.isAuthorized = undefined
   }
   checkAuthSuccess() {
     const app = this.selectors.getApp()

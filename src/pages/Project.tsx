@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Project: React.FC<{ projectId?: string }> = React.memo(({ projectId }) => <div>Project {projectId}</div>)
+const Project: React.FC = React.memo(() => <div>Project</div>)
 
-Project.displayName = 'Memo(Project)'
+Project.displayName = 'Project'
 
 export default Project
