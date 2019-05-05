@@ -1,0 +1,24 @@
+@import-normalize;
+
+@import '~styles/fonts.css';
+@import '~styles/colors.css';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  overscroll-behavior: none;
+}
+
+body.font-loaded {
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+div#root {
+  display: flex;
+  min-height: 100vh;
+}
