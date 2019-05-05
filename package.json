@@ -5,13 +5,17 @@
   "dependencies": {
     "axios": "^0.18.0",
     "clsx": "^1.0.4",
+    "date-fns": "^2.0.0-alpha.27",
     "fontfaceobserver": "^2.1.0",
     "hookrouter": "^1.2.2",
+    "i18next": "^15.1.0",
+    "i18next-xhr-backend": "^2.0.1",
     "immer": "^3.1.1",
     "immer-reducer": "^0.7.0",
     "path-to-regexp": "^3.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-i18next": "^10.9.0",
     "react-redux": "^7.1.0-alpha.4",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",
@@ -22,6 +26,7 @@
     "@hot-loader/react-dom": "^16.8.6",
     "@svgr/webpack": "4.2.0",
     "@types/fontfaceobserver": "^0.0.6",
+    "@types/i18next-xhr-backend": "^1.4.2",
     "@types/jest": "24.0.12",
     "@types/node": "12.0.0",
     "@types/react": "16.8.16",
@@ -29,6 +34,8 @@
     "@types/react-redux": "^7.0.8",
     "@typescript-eslint/eslint-plugin": "1.7.0",
     "@typescript-eslint/parser": "1.7.0",
+    "acorn-jsx": "4.x",
+    "acorn-stage3": "0.6.0",
     "babel-eslint": "10.0.1",
     "babel-jest": "24.8.0",
     "babel-loader": "8.0.5",
@@ -53,6 +60,7 @@
     "html-webpack-plugin": "4.0.0-beta.5",
     "http-proxy-middleware": "^0.19.1",
     "husky": "^2.2.0",
+    "i18next-parser": "^1.0.0-beta34",
     "identity-obj-proxy": "3.0.0",
     "is-wsl": "2.0.0",
     "jest": "24.8.0",
@@ -95,13 +103,14 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "pretty": "prettier --write \"**/*.{js,ts,tsx,css}\"",
+    "pretty": "prettier --write \"src/**/*.{js,ts,tsx,css}\"",
     "lint": "eslint --ext .ts,.tsx --fix src",
-    "stylelint": "stylelint \"./src/**/*.css\" --fix"
+    "stylelint": "stylelint \"src/**/*.css\" --fix",
+    "i18n:parser": "i18next --config config/i18next-parser.config.js \"src/**/*.tsx\""
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged && yarn lint && yarn stylelint"
+      "pre-commit": "pretty-quick --staged && yarn run lint && yarn run stylelint"
     }
   },
   "browserslist": {

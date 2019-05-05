@@ -1,6 +1,6 @@
 import React from 'react'
 import { usePath, navigate } from 'hookrouter'
-import PATH from 'constants/path'
+import PATHS from 'constants/paths'
 
 type Props = {
   isAuthorized: boolean
@@ -11,7 +11,7 @@ const Private: React.FC<Props> = React.memo(({ isAuthorized, page: Page }) => {
   const currentPath = usePath(false)
 
   if (!isAuthorized) {
-    navigate(PATH.signin, false, { returnTo: currentPath })
+    navigate(PATHS.signin, false, { returnTo: currentPath })
     return null
   }
 

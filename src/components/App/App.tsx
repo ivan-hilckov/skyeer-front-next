@@ -1,6 +1,6 @@
 import { hot } from 'react-hot-loader/root'
 
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from 'components/Loader/Loader'
 import Router from 'components/App/Router'
@@ -22,7 +22,12 @@ const App: React.FC = React.memo(() => {
     }
   }, [checkAuth, checkState])
 
-  return checkState !== PROGRESS_TYPES.SUCCESS ? <Loader /> : <Router isAuthorized={isAuthorized} />
+  const content = useMemo(
+    () => (checkState !== PROGRESS_TYPES.SUCCESS ? <Loader /> : <Router isAuthorized={isAuthorized} />),
+    [checkState, isAuthorized]
+  )
+
+  return content
 })
 
 App.displayName = 'App'

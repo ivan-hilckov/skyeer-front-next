@@ -1,6 +1,6 @@
 import React from 'react'
 import { navigate } from 'hookrouter'
-import PATH from 'constants/path'
+import PATHS from 'constants/paths'
 
 type Props = {
   isAuthorized: boolean
@@ -9,7 +9,7 @@ type Props = {
 
 const Public: React.FC<Props> = React.memo(({ isAuthorized, page: Page }) => {
   if (isAuthorized) {
-    navigate(PATH.projects, false)
+    navigate(PATHS.projects, false)
     return null
   }
 

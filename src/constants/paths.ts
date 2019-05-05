@@ -1,4 +1,4 @@
-export enum PATH {
+export enum PATHS {
   projects = '/',
   project = '/project/:projectId',
   projectCreate = '/project/create',
@@ -20,4 +20,4 @@ export enum PATH {
   acceptInvite = '/accept-invite/:token',
 }
 
-export default PATH
+export default PATHS

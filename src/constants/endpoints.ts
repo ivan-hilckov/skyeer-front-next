@@ -1,4 +1,3 @@
-// import invariant from 'invariant'
 import generatePath from 'utils/generatePath'
 
 const getUrl = (url: string) => (id?: string | number): string =>
