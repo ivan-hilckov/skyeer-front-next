@@ -1,34 +1,24 @@
 import { createActionCreators, ImmerReducer } from 'immer-reducer'
-import STATE from 'constants/state'
-import { State } from 'store/rootReducers'
-import { AppSelectors } from 'store/selectors/app'
-
-export interface AppState {
-  checkState: STATE
-  isAuthorized: boolean
-}
-
-export const appInitialState: AppState = {
-  checkState: STATE.WORK,
-  isAuthorized: false,
-}
+import PROGRESS_TYPES from 'constants/progressTypes'
+import { State, Selectors } from 'store/rootState'
 
 export class AppReducer extends ImmerReducer<State> {
-  selectors = new AppSelectors(this.draftState)
+  selectors = new Selectors(this.draftState)
+
   checkAuth() {
     const app = this.selectors.getApp()
-    app.checkState = STATE.WORK
+    app.checkState = PROGRESS_TYPES.WORK
   }
+
   checkAuthSuccess() {
     const app = this.selectors.getApp()
-
-    app.checkState = STATE.SUCCESS
+    app.checkState = PROGRESS_TYPES.SUCCESS
     app.isAuthorized = true
   }
+
   checkAuthError() {
     const app = this.selectors.getApp()
-
-    app.checkState = STATE.SUCCESS
+    app.checkState = PROGRESS_TYPES.SUCCESS
     app.isAuthorized = false
   }
 }
