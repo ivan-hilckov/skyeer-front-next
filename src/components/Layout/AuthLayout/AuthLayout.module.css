@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  min-height: 500px;
+  background: url('~images/bg/bg.svg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.box {
+  width: 420px;
+  height: 470px;
+  box-shadow: 0 15px 34px 0 var(--shadow-bluey-grey);
+  background-color: var(--white);
+  padding: 27px 60px 24px;
+}
+
+@custom-media --mobile-s (width <= 320px);
+@custom-media --mobile-m (width <= 375px);
+@custom-media --mobile-l (width <= 425px);
+@custom-media --tablet (width <= 768px);
+
+@media (--tablet) {
+  .box {
+    width: 80%;
+    max-width: 420px;
+    padding: 27px 50px 24px;
+  }
+}
+@media (--mobile-l) {
+  .box {
+    width: 80%;
+    padding: 27px 40px 24px;
+  }
+}
+@media (--mobile-m) {
+  .box {
+    width: 90%;
+    padding: 27px 30px 24px;
+  }
+}
+@media (--mobile-s) {
+  .box {
+    width: 95%;
+    padding: 27px 20px 24px;
+  }
+}

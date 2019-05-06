@@ -2,6 +2,22 @@
 
 @import '~styles/fonts.css';
 @import '~styles/colors.css';
+@import '~styles/breakpoints.css';
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+* {
+  font: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  min-width: 320px;
+}
 
 body {
   margin: 0;
@@ -18,7 +34,9 @@ body.font-loaded {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-div#root {
+#root {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
+  flex-grow: 1;
 }
