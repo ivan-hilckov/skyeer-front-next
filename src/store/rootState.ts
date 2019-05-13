@@ -6,6 +6,65 @@ export interface AppState {
   isAuthorized: boolean
 }
 
+export interface LayersMeasureWidgetValue {
+  id: string
+  name: string
+}
+
+export interface LayersMeasureWidgetMeasureState {
+  id: string
+  type: 'HEIGHT' | 'RULER' | 'PROFILE' | 'SLOPE' | 'AREA' | 'VOLUME' | 'VOLUME_DONE' | 'VOLUME_FUTURE'
+  value: LayersMeasureWidgetValue
+}
+export interface LayersMeasureWidgetFileState {
+  id: string
+  value: LayersMeasureWidgetValue
+}
+export interface LayersMeasureWidgetChoiceState {
+  id: string
+  value: LayersMeasureWidgetValue
+}
+export interface LayersMeasureWidgetTextState {
+  id: string
+  value: LayersMeasureWidgetValue
+}
+
+export interface LayerMeasureTemplateState {
+  variants: 'MEASURE' | 'FILE' | 'CHOICE' | 'TEXT'
+  widgets: {
+    [key: number]:
+      | LayersMeasureWidgetMeasureState
+      | LayersMeasureWidgetFileState
+      | LayersMeasureWidgetChoiceState
+      | LayersMeasureWidgetTextState
+  }
+}
+
+export interface LayerMeasureState {
+  name: string
+  unit: number
+  gemetry: {
+    type: 'POINT' | 'LINE' | 'POLYGON'
+  }
+  material?: number
+  style: {}
+  template: {
+    [key: number]: LayerMeasureTemplateState
+  }
+}
+
+export interface LayersMeasureState {
+  tool: {
+    variants: 'HEIGHT' | 'RULER' | 'PROFILE' | 'SLOPE' | 'AREA' | 'VOLUME' | 'VOLUME_DONE' | 'VOLUME_FUTURE'
+    last: 'HEIGHT' | 'RULER' | 'PROFILE' | 'SLOPE' | 'AREA' | 'VOLUME' | 'VOLUME_DONE' | 'VOLUME_FUTURE'
+  }
+  draftlayer?: LayerMeasureState
+  draftTemplate?: LayerMeasureTemplateState
+  layers: {
+    [key: number]: LayerMeasureState
+  }
+}
+
 export interface State {
   app: AppState
 }
