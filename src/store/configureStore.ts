@@ -1,5 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
+import { DEVELOPMENT } from 'constants/env'
 import rootReducer from 'store/rootReducer'
 import rootSaga from 'store/rootSaga'
 
@@ -22,7 +23,7 @@ export function configureStore() {
 
   sagaMiddleware.run(rootSaga)
 
-  if (module.hot) {
+  if (DEVELOPMENT && module.hot) {
     module.hot.accept('store/rootReducer', () => {
       store.replaceReducer(require('store/rootReducer').default)
     })
